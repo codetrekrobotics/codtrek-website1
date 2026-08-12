@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeTrek Robotics — Coding Adventures for Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A4A;
+    --navy-deep:#131F38;
+    --coral:#FF6B4A;
+    --coral-soft:#FFE4DC;
+    --teal:#2EC4B6;
+    --cream:#FAF7F2;
+    --charcoal:#2B2B2B;
+    --line:#E3DDD1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--cream);
+    color:var(--charcoal);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{
+    font-family:'Baloo 2', sans-serif;
+    color:var(--navy);
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* ---- Nav ---- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,247,242,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .brand{font-size:1.4rem; font-weight:800; display:flex; align-items:center; gap:8px;}
+  .brand .dot{width:10px; height:10px; border-radius:50%; background:var(--coral); display:inline-block;}
+  .nav-links{display:flex; gap:28px; list-style:none;}
+  .nav-links a{
+    font-weight:600; font-size:0.95rem; color:var(--navy);
+    padding:6px 2px; border-bottom:2px solid transparent;
+    transition:border-color .2s;
+  }
+  .nav-links a:hover{border-color:var(--coral);}
+  @media(max-width:640px){ .nav-links{gap:16px; font-size:0.85rem;} }
+
+  /* ---- Trail motif (signature element) ---- */
+  .trail-divider{
+    max-width:1100px; margin:0 auto; padding:0 24px;
+  }
+  .trail-divider svg{width:100%; height:40px; display:block;}
+
+  section{padding:90px 24px; position:relative;}
+  .wrap{max-width:1100px; margin:0 auto;}
+
+  /* ---- Hero ---- */
+  .hero{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    padding:120px 24px 100px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-eyebrow{
+    color:var(--coral);
+    font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    font-size:0.85rem; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 3.8rem);
+    color:#fff; line-height:1.1; max-width:750px;
+    margin-bottom:22px;
+  }
+  .hero h1 span{color:var(--coral);}
+  .hero p.lede{
+    font-size:1.2rem; color:#D9E0EC; max-width:560px; margin-bottom:36px;
+  }
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:14px 28px; border-radius:999px;
+    font-weight:700; font-size:1rem; transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--coral); color:#fff; box-shadow:0 8px 24px rgba(255,107,74,0.35);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:2px solid rgba(255,255,255,0.35); color:#fff;}
+  .btn-ghost:hover{border-color:#fff;}
+
+  /* animated dotted trail across hero */
+  .hero-trail{
+    position:absolute; bottom:0; left:0; right:0; height:120px; z-index:1; opacity:0.5;
+  }
+  .hero-trail path{
+    stroke-dasharray:8 10;
+    animation:dash 30s linear infinite;
+  }
+  @keyframes dash{ to{ stroke-dashoffset:-500; } }
+  @media (prefers-reduced-motion: reduce){ .hero-trail path{animation:none;} }
+
+  /* ---- Section headers ---- */
+  .eyebrow{
+    color:var(--coral); font-weight:700; text-transform:uppercase;
+    font-size:0.8rem; letter-spacing:0.08em; margin-bottom:10px;
+  }
+  section h2{font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:18px;}
+  section > .wrap > p.intro{max-width:640px; color:#4B4B4B; font-size:1.05rem; margin-bottom:48px;}
+
+  /* ---- About ---- */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start;
+  }
+  @media(max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .credential-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:28px;
+  }
+  .credential-card h3{font-size:1.05rem; margin-bottom:14px;}
+  .credential-list{list-style:none;}
+  .credential-list li{
+    padding:10px 0; border-bottom:1px solid var(--line);
+    font-size:0.95rem; display:flex; gap:10px;
+  }
+  .credential-list li:last-child{border-bottom:none;}
+  .credential-list .mark{color:var(--teal); font-weight:800;}
+  .about-copy p{margin-bottom:18px; color:#3A3A3A;}
+  .highlight-strip{
+    display:flex; gap:24px; margin-top:28px; flex-wrap:wrap;
+  }
+  .stat{
+    background:var(--navy); color:#fff; border-radius:14px; padding:18px 22px; flex:1; min-width:140px;
+  }
+  .stat .num{font-family:'Baloo 2'; font-size:1.6rem; font-weight:800; color:var(--coral);}
+  .stat .label{font-size:0.82rem; color:#CDD6E4; margin-top:2px;}
+
+  /* ---- Programs ---- */
+  .programs{background:#fff;}
+  .program-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  @media(max-width:900px){ .program-grid{grid-template-columns:1fr;} }
+  .program-card{
+    border:1px solid var(--line); border-radius:16px; padding:28px;
+    background:var(--cream);
+    position:relative;
+  }
+  .program-card .icon{
+    width:46px; height:46px; border-radius:12px; background:var(--coral-soft);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    font-size:1.4rem;
+  }
+  .program-card h3{font-size:1.15rem; margin-bottom:10px;}
+  .program-card p{color:#4B4B4B; font-size:0.95rem; margin-bottom:14px;}
+  .program-card .tag{
+    display:inline-block; font-size:0.78rem; font-weight:700; color:var(--navy);
+    background:#EDEBE3; border-radius:999px; padding:4px 12px;
+  }
+  .service-note{
+    margin-top:44px; background:var(--navy); color:#fff; border-radius:16px;
+    padding:28px 32px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .service-note .badge{
+    font-family:'Baloo 2'; font-weight:800; color:var(--coral); font-size:1.1rem;
+  }
+
+  /* ---- Contact ---- */
+  .contact{
+    background:linear-gradient(180deg, var(--navy-deep), var(--navy));
+    color:#fff;
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  @media(max-width:800px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact h2{color:#fff;}
+  .contact-info-list{list-style:none; margin-top:24px;}
+  .contact-info-list li{padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.15); font-size:0.98rem;}
+  .contact-info-list .k{color:#9FB0CC; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:4px;}
+  form{background:#fff; border-radius:16px; padding:32px; color:var(--charcoal);}
+  form label{display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px; margin-top:16px;}
+  form label:first-child{margin-top:0;}
+  form input, form textarea{
+    width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px;
+    font-family:inherit; font-size:0.95rem; background:var(--cream);
+  }
+  form textarea{min-height:100px; resize:vertical;}
+  form .btn-primary{margin-top:22px; border:none; cursor:pointer; width:100%; text-align:center;}
+
+  footer{
+    background:var(--navy-deep); color:#8EA0C0; text-align:center;
+    padding:32px 24px; font-size:0.85rem;
+  }
+  footer .brand{color:#fff; margin-bottom:6px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="dot"></span>CodeTrek Robotics</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ============ HOME ============ -->
+<section id="home" class="hero">
+  <svg class="hero-trail" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,80 Q150,20 300,80 T600,80 T900,80 T1200,80" fill="none" stroke="#FF6B4A" stroke-width="3"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-eyebrow">Southeastern Connecticut</div>
+    <h1>Coding adventures for kids, <span>one trail at a time.</span></h1>
+    <p class="lede">CodeTrek Robotics brings hands-on coding programs to after-school clubs, recreation centers, and homeschool groups for kids ages 7–12 — taught by a veteran STEM educator who makes learning feel like an adventure, not a worksheet.</p>
+    <div class="cta-row">
+      <a href="#programs" class="btn btn-primary">See Programs</a>
+      <a href="#contact" class="btn btn-ghost">Book a Program</a>
+    </div>
+  </div>
+</section>
+
+<div class="trail-divider">
+  <svg viewBox="0 0 1100 40" preserveAspectRatio="none">
+    <line x1="0" y1="20" x2="1100" y2="20" stroke="#E3DDD1" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">Meet Your Guide</div>
+    <h2>Taught by an educator who's done this for years — just not under this name yet.</h2>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p><strong>Kimberly Stewart</strong> is a STEM Teacher at Groton Middle School and an Adjunct Professor at Quinnipiac University, where she trains future educators in technology integration. She's spent her career building coding and robotics programs that get kids genuinely excited — not because it's required, but because the lesson connects to something they actually care about.</p>
+        <p>CodeTrek Robotics grew out of a simple observation: coding and robotics still aren't available in many Connecticut schools. CodeTrek brings that opportunity directly to after-school programs, recreation centers, and homeschool groups — starting with coding, with robotics kits joining the lineup soon.</p>
+        <div class="highlight-strip">
+          <div class="stat"><div class="num">25+</div><div class="label">Grant applications written &amp; funded</div></div>
+          <div class="stat"><div class="num">7–12</div><div class="label">Age range served</div></div>
+          <div class="stat"><div class="num">2024</div><div class="label">Hour of Code on local TV, two years running</div></div>
+        </div>
+      </div>
+      <div class="credential-card">
+        <h3>Credentials &amp; Training</h3>
+        <ul class="credential-list">
+          <li><span class="mark">✓</span> M.S. Curriculum Design &amp; Assessment (STEM)</li>
+          <li><span class="mark">✓</span> CT Certified: Technology Education, General Science</li>
+          <li><span class="mark">✓</span> Project Lead The Way (PLTW) Certified</li>
+          <li><span class="mark">✓</span> NASA Endeavor Leadership Program Graduate</li>
+          <li><span class="mark">✓</span> STEM Leadership Certification, Columbia Teachers College</li>
+          <li><span class="mark">✓</span> Robotics platforms: SamLabs, Ozobots, LEGO</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trail-divider">
+  <svg viewBox="0 0 1100 40" preserveAspectRatio="none">
+    <line x1="0" y1="20" x2="1100" y2="20" stroke="#E3DDD1" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- ============ PROGRAMS ============ -->
+<section id="programs" class="programs">
+  <div class="wrap">
+    <div class="eyebrow">What We Offer</div>
+    <h2>Programs built for real after-school hours.</h2>
+    <p class="intro">Every CodeTrek program is hands-on and project-based — kids predict, build, and problem-solve, working from their own device with age-appropriate coding tools.</p>
+    <div class="program-grid">
+      <div class="program-card">
+        <div class="icon">🏫</div>
+        <h3>After-School Clubs</h3>
+        <p>Weekly coding sessions hosted through school after-school programs, introducing kids to block-based and beginner text coding through fun, themed challenges.</p>
+        <span class="tag">Ages 7–12</span>
+      </div>
+      <div class="program-card">
+        <div class="icon">📍</div>
+        <h3>Recreation Center Programs</h3>
+        <p>Seasonal coding sessions run through town recreation departments and libraries — currently offered through winter programs in Groton and East Lyme.</p>
+        <span class="tag">Winter session</span>
+      </div>
+      <div class="program-card">
+        <div class="icon">🏡</div>
+        <h3>Homeschool Classes</h3>
+        <p>Small-group coding classes designed for homeschool co-ops, giving kids structured, social, hands-on tech time each week.</p>
+        <span class="tag">Small groups</span>
+      </div>
+    </div>
+    <div class="service-note">
+      <div class="badge">Service Area</div>
+      <div>Serving Groton, East Lyme, and towns within a 45-minute drive across southeastern Connecticut. Robotics kits joining the program lineup soon — reach out to be first in line.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow" style="color:#FF6B4A;">Get In Touch</div>
+        <h2>Bring CodeTrek to your program.</h2>
+        <p style="color:#C9D2E3; max-width:420px;">Whether you run a recreation department, an after-school program, or a homeschool group — let's talk about scheduling a coding session for your kids.</p>
+        <ul class="contact-info-list">
+          <li><span class="k">Email</span>codetrekrobotics@gmail.com</li>
+          <li><span class="k">Phone</span>(860) 625-7397</li>
+          <li><span class="k">Service Area</span>Southeastern Connecticut (within 45 min of East Lyme)</li>
+        </ul>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Thanks! This form is a placeholder — connect it to an email service or form handler before going live.');">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name" required>
+        <label for="org">Organization (if applicable)</label>
+        <input id="org" type="text" placeholder="School, rec center, homeschool group...">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell me about your program and what you're looking for..."></textarea>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">CodeTrek Robotics</div>
+  <div>Coding Adventures for Kids &middot; Southeastern Connecticut</div>
+</footer>
+
+</body>
+</html>
