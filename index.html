@@ -1,3 +1,6 @@
+I see the issue — the file itself keeps opening as a live webpage no matter how you click it. Let's bypass files entirely. I'm going to paste the raw code directly into my message as plain text below (inside the gray box) — this way there's nothing to "open," just text sitting in the chat for you to select and copy directly.
+
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +35,6 @@
   }
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
-
-  /* ---- Nav ---- */
   header{
     position:sticky; top:0; z-index:50;
     background:rgba(250,247,242,0.92);
@@ -55,17 +56,12 @@
   }
   .nav-links a:hover{border-color:var(--coral);}
   @media(max-width:640px){ .nav-links{gap:16px; font-size:0.85rem;} }
-
-  /* ---- Trail motif (signature element) ---- */
   .trail-divider{
     max-width:1100px; margin:0 auto; padding:0 24px;
   }
   .trail-divider svg{width:100%; height:40px; display:block;}
-
   section{padding:90px 24px; position:relative;}
   .wrap{max-width:1100px; margin:0 auto;}
-
-  /* ---- Hero ---- */
   .hero{
     background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
     color:var(--cream);
@@ -97,8 +93,6 @@
   .btn-primary:hover{transform:translateY(-2px);}
   .btn-ghost{border:2px solid rgba(255,255,255,0.35); color:#fff;}
   .btn-ghost:hover{border-color:#fff;}
-
-  /* animated dotted trail across hero */
   .hero-trail{
     position:absolute; bottom:0; left:0; right:0; height:120px; z-index:1; opacity:0.5;
   }
@@ -108,16 +102,12 @@
   }
   @keyframes dash{ to{ stroke-dashoffset:-500; } }
   @media (prefers-reduced-motion: reduce){ .hero-trail path{animation:none;} }
-
-  /* ---- Section headers ---- */
   .eyebrow{
     color:var(--coral); font-weight:700; text-transform:uppercase;
     font-size:0.8rem; letter-spacing:0.08em; margin-bottom:10px;
   }
   section h2{font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:18px;}
   section > .wrap > p.intro{max-width:640px; color:#4B4B4B; font-size:1.05rem; margin-bottom:48px;}
-
-  /* ---- About ---- */
   .about-grid{
     display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start;
   }
@@ -143,8 +133,6 @@
   }
   .stat .num{font-family:'Baloo 2'; font-size:1.6rem; font-weight:800; color:var(--coral);}
   .stat .label{font-size:0.82rem; color:#CDD6E4; margin-top:2px;}
-
-  /* ---- Programs ---- */
   .programs{background:#fff;}
   .program-grid{
     display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
@@ -173,8 +161,6 @@
   .service-note .badge{
     font-family:'Baloo 2'; font-weight:800; color:var(--coral); font-size:1.1rem;
   }
-
-  /* ---- Contact ---- */
   .contact{
     background:linear-gradient(180deg, var(--navy-deep), var(--navy));
     color:#fff;
@@ -194,7 +180,6 @@
   }
   form textarea{min-height:100px; resize:vertical;}
   form .btn-primary{margin-top:22px; border:none; cursor:pointer; width:100%; text-align:center;}
-
   footer{
     background:var(--navy-deep); color:#8EA0C0; text-align:center;
     padding:32px 24px; font-size:0.85rem;
@@ -216,7 +201,6 @@
   </nav>
 </header>
 
-<!-- ============ HOME ============ -->
 <section id="home" class="hero">
   <svg class="hero-trail" viewBox="0 0 1200 120" preserveAspectRatio="none">
     <path d="M0,80 Q150,20 300,80 T600,80 T900,80 T1200,80" fill="none" stroke="#FF6B4A" stroke-width="3"/>
@@ -238,7 +222,6 @@
   </svg>
 </div>
 
-<!-- ============ ABOUT ============ -->
 <section id="about">
   <div class="wrap">
     <div class="eyebrow">Meet Your Guide</div>
@@ -274,7 +257,6 @@
   </svg>
 </div>
 
-<!-- ============ PROGRAMS ============ -->
 <section id="programs" class="programs">
   <div class="wrap">
     <div class="eyebrow">What We Offer</div>
@@ -307,7 +289,6 @@
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
 <section id="contact" class="contact">
   <div class="wrap">
     <div class="contact-grid">
@@ -321,16 +302,17 @@
           <li><span class="k">Service Area</span>Southeastern Connecticut (within 45 min of East Lyme)</li>
         </ul>
       </div>
-      <form onsubmit="event.preventDefault(); alert('Thanks! This form is a placeholder — connect it to an email service or form handler before going live.');">
+      <form action="https://formspree.io/f/maewbqqe" method="POST">
         <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Your name" required>
+        <input id="name" name="Name" type="text" placeholder="Your name" required>
         <label for="org">Organization (if applicable)</label>
-        <input id="org" type="text" placeholder="School, rec center, homeschool group...">
+        <input id="org" name="Organization" type="text" placeholder="School, rec center, homeschool group...">
         <label for="email">Email</label>
-        <input id="email" type="email" placeholder="you@example.com" required>
+        <input id="email" name="_replyto" type="email" placeholder="you@example.com" required>
         <label for="message">Message</label>
-        <textarea id="message" placeholder="Tell me about your program and what you're looking for..."></textarea>
+        <textarea id="message" name="Message" placeholder="Tell me about your program and what you're looking for..."></textarea>
         <button class="btn btn-primary" type="submit">Send Message</button>
+        <input type="hidden" name="_subject" value="New message from CodeTrek website">
       </form>
     </div>
   </div>
